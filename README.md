@@ -32,6 +32,13 @@ $ sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-uti
 
 Avec ce dépôt : https://launchpad.net/~maarten-fonville/+archive/ubuntu/ppa
 Doc qui peut être utile ici : https://doc.ubuntu-fr.org/android_sdk#android_studio
+et qui indique :
+
+```bash
+sudo apt-add-repository ppa:maarten-fonville/android-studio
+sudo apt-get update 
+sudo apt-get install android-studio
+```
 
 #### Option 2 : Debian
 
