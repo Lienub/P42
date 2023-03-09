@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TP21</string>
+    <string name="hello_fragment_one">I\'m the fragment One.</string>
+    <string name="hello_fragment_two">I\'m the fragment Two.</string>
+    <string name="button_back_two">Back</string>
+    <string name="image_on_fragment_two">Image on fragment two</string>
+    <string name="button_back_one">Back</string>
+    <string name="image_on_frgament_one">Image on frgament one</string>
+</resources>
