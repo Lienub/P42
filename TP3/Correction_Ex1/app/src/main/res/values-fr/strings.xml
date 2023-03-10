@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP3a</string>
+    <string name="enter_city">"Entrez votre ville : "</string>
+    <string name="default_city">Strasbourg</string>
+    <string name="json_res">Votre méto s\'affichera ici...</string>
+    <string name="weather_icon">Icône de la météo</string>
+    <string name="temperature">Température</string>
+    <string name="humidity">Humidité</string>
+    <string name="wind_speed">Vitesse du vent</string>
+    <string name="clouds">Nuages</string>
+</resources>

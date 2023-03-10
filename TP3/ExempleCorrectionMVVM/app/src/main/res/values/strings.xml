@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP3c</string>
+    <string name="enter_city">Enter your city :</string>
+    <string name="default_city">Strasbourg</string>
+    <string name="json_res">Weather will be show here...</string>
+    <string name="weather_icon">Weather icon</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="clouds">Clouds</string>
+</resources>
