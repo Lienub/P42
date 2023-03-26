@@ -2,6 +2,8 @@ package com.example.projet;
 
 import android.os.Bundle;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,14 +13,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.projet.databinding.ActivityMainBinding;
+import com.example.projet.viewmodel.AddressBookViewModel;
 
 public class MainActivity extends AppCompatActivity {
-
+    RequestQueue instance = null;
     private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        instance = Volley.newRequestQueue(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
