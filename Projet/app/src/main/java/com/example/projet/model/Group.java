@@ -5,23 +5,20 @@ import java.util.List;
 public class Group {
 
     private List<Contact> contacts;
+    private final String id;
     private final String title;
 
-    public Group(String title)
+    public Group(String id, String title)
     {
+        this.id = id;
         this.title = title;
     }
-
-    public Group(String title, List<Contact> contacts)
-    {
-        this.title = title;
-        this.contacts = contacts;
-    }
-
     public List<Contact> getContacts() {
         return contacts;
     }
-
+    public String getId() {
+        return id;
+    }
     public String getTitle() {
         return title;
     }
