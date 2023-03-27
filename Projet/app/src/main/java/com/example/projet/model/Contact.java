@@ -1,5 +1,6 @@
 package com.example.projet.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Contact {
@@ -19,6 +20,15 @@ public class Contact {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public static ArrayList<Contact> createContactsList(int i) {
+        ArrayList<Contact> contacts = null;
+        for (int j = 0; j < i; j++) {
+            Contact contact = new Contact("1", "firstname" + j, "lastname" + j);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 
     public List<Group> getGroups() {

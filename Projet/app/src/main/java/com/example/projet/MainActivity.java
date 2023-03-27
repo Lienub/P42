@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.projet.model.Contact;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +12,20 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet.databinding.ActivityMainBinding;
 import com.example.projet.viewmodel.AddressBookViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     RequestQueue instance = null;
     private ActivityMainBinding binding;
+
+    ArrayList<Contact> contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +46,18 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        //test git
+        // Récupération du RV
+        //RecyclerView recyclerView = findViewById(R.id.recyclerview);
+
+        // Création de la liste de contacts
+        //List<Item> items = new ArrayList<Item>();
+
+
+        // Set des besoins du RV
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //recyclerView.setAdapter(new MyAdapter(items));
+
     }
 
 }
