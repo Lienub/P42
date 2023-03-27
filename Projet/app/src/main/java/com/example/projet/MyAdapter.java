@@ -2,6 +2,7 @@ package com.example.projet;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,18 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    Context context;
     List<Item> items;
+    private final RecyclerViewInterface recyclerViewInterface;
 
-    public MyAdapter(Context context, List<Item> items) {
-        this.context = context;
+    public MyAdapter(List<Item> items, RecyclerViewInterface recyclerViewInterface) {
         this.items = items;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.utme_view, parent, false));
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.utme_view, parent, false);
+        return new MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override

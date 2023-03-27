@@ -2,9 +2,9 @@ package com.example.projet;
 
 import android.os.Bundle;
 
-import com.example.projet.model.Contact;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.projet.model.Contact;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,27 +47,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         // Récupération du RV
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        //RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
         // Création de la liste de contacts
-        List<Item> items = new ArrayList<Item>();
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
+        //List<Item> items = new ArrayList<Item>();
+
 
         // Set des besoins du RV
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(new MyAdapter(getApplicationContext(), items));
+        //recyclerView.setAdapter(new MyAdapter(items));
 
     }
 

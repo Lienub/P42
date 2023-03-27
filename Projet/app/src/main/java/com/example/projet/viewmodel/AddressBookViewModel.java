@@ -47,7 +47,6 @@ public class AddressBookViewModel extends ViewModel {
         response -> {
             try {
                 JSONArray jsArr = new JSONArray(response);
-                -
             } catch (JSONException e) {
                 e.printStackTrace();
             }
