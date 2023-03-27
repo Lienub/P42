@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         instance = Volley.newRequestQueue(this);
 
+        AddressBookViewModel addressBookViewModel = new AddressBookViewModel(instance);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
