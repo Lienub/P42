@@ -1,4 +1,4 @@
-package com.example.projet;
+package com.example.projet.view;
 
 import android.view.View;
 

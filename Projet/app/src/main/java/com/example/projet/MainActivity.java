@@ -1,6 +1,8 @@
 package com.example.projet;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -22,17 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    RequestQueue instance = null;
+
     private ActivityMainBinding binding;
+    private static MainActivity instance;
 
     ArrayList<Contact> contacts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        instance = Volley.newRequestQueue(this);
-
-        AddressBookViewModel addressBookViewModel = new AddressBookViewModel(instance);
+        instance = this;
+        Log.d("TEST", "onCreate: ");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -58,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
         //recyclerView.setAdapter(new MyAdapter(items));
 
+    }
+
+    public static synchronized MainActivity getInstance() {
+        return instance;
+    }
+
+    public static Context getContext() {
+        return instance.getApplicationContext();
     }
 
 }

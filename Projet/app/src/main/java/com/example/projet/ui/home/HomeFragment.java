@@ -2,6 +2,7 @@ package com.example.projet.ui.home;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,26 +15,28 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projet.Item;
-import com.example.projet.MyAdapter;
+import com.android.volley.RequestQueue;
+import com.example.projet.view.MyAdapter;
 import com.example.projet.R;
-import com.example.projet.RecyclerViewInterface;
+import com.example.projet.view.RecyclerViewInterface;
 import com.example.projet.databinding.FragmentHomeBinding;
+import com.example.projet.model.*;
+import com.example.projet.viewmodel.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements RecyclerViewInterface {
-
+    RequestQueue instance = null;
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
-    private List<Item> items;
+    private List<Contact> contacts;
     private MyAdapter adapter;
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        Log.d("TEST", "onCreateView: ");
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
@@ -50,27 +53,17 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view,savedInstanceState);
-
+        Log.d("TEST", "onViewCreated: ");
 
         recyclerView = view.findViewById(R.id.recyclerview);
-        items  = new ArrayList<>();
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-        items.add(new Item("John", "Wick"));
-        items.add(new Item("Stella", "Star"));
-        items.add(new Item("Jean", "Faible"));
-
-        adapter = new MyAdapter(items, this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
+        model.getContacts().observe(getViewLifecycleOwner(), contacts -> {
+            Log.d("TEST", "onViewCreated: contacts : " + contacts);
+            adapter = new MyAdapter(contacts, this);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        });
     }
     @Override
     public void onDestroyView() {
