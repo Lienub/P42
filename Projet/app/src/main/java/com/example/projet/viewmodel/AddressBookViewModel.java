@@ -7,9 +7,14 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.projet.model.*;
 
@@ -21,7 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AddressBookViewModel extends ViewModel {
-    private static final String apiBasename = "http://10.0.2.2:3000";
+    private static final String apiBasename = "https://api.w41.0x2a.pm";
 
     private final RequestQueue instance = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
     private MutableLiveData<List<Contact>> contacts;
@@ -153,4 +158,83 @@ public class AddressBookViewModel extends ViewModel {
         instance.add(contactRequest);
     }
 
+    private void deletePerson(String idPerson) {
+        String url = apiBasename + "/person/" + idPerson;
+        StringRequest deletePersonRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de deletePerson");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }
+        });
+
+        instance.add(deletePersonRequest);
+    }
+
+    private void deleteGroup(String idGroup) {
+        String url = apiBasename + "/group/" + idGroup;
+        StringRequest deleteGroupRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de deleteGroup");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }
+        });
+
+        instance.add(deleteGroupRequest);
+    }
+
+    private void deletePersonFromGroup(String idPerson, String idGroup){
+        String url = apiBasename + "/person/" + idPerson + "/group/" + idGroup;
+        StringRequest deletePersonFromGroupRequest = new StringRequest(Request.Method.DELETE,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de deletePersonFromGroup");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }});
+
+        instance.add(deletePersonFromGroupRequest);
+
+    }
+
+    private void addPersonToGroup(String idPerson, String idGroup){
+        String url = apiBasename + "/person/" + idPerson + "/group/" + idGroup;
+        StringRequest addPersonToGroupRequest = new StringRequest(Request.Method.POST,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de addPersonToGroup");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }});
+
+        instance.add(addPersonToGroupRequest);
+
+    }
 }

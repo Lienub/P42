@@ -12,8 +12,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.projet.MainActivity;
 import com.example.projet.model.Contact;
@@ -21,8 +24,8 @@ import com.example.projet.model.Group;
 import com.example.projet.model.MailAddress;
 import com.example.projet.model.Phone;
 import com.example.projet.model.PostalAddress;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -346,4 +349,82 @@ public class InfosViewModel extends ViewModel {
         requestQueue.add(groupRequest);
     }
 
+
+    public void deletePerson(String idPerson) {
+        String url = apiBasename + "/person/" + idPerson;
+        StringRequest deletePersonRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de deletePerson");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }
+        });
+    }
+
+    private void deleteGroup(String idGroup) {
+        String url = apiBasename + "/group/" + idGroup;
+        StringRequest deleteGroupRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de deleteGroup");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }
+        });
+
+        requestQueue.add(deleteGroupRequest);
+    }
+
+    private void deletePersonFromGroup(String idPerson, String idGroup){
+        String url = apiBasename + "/person/" + idPerson + "/group/" + idGroup;
+        StringRequest deletePersonFromGroupRequest = new StringRequest(Request.Method.DELETE,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de deletePersonFromGroup");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }});
+
+        requestQueue.add(deletePersonFromGroupRequest);
+
+    }
+
+    private void addPersonToGroup(String idPerson, String idGroup){
+        String url = apiBasename + "/person/" + idPerson + "/group/" + idGroup;
+        StringRequest addPersonToGroupRequest = new StringRequest(Request.Method.POST,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Afficher dans la console que ça a bien marché
+                        Log.d("TAG", "Dans le onResponse de addPersonToGroup");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Gestion de l'erreur
+                Log.e("TAG", "Erreur :  ", error);
+            }});
+
+        requestQueue.add(addPersonToGroupRequest);
+
+    }
 }

@@ -56,6 +56,7 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
             postalRecyclerView = view.findViewById(R.id.recycler_post);
             groupRecyclerView = view.findViewById(R.id.recycler_group);
 
+            Button supprimer = view.findViewById(R.id.delete_confirm);
             Button addMail = view.findViewById(R.id.add_mail);
             Button addPostal = view.findViewById(R.id.add_post);
             Button addPhone = view.findViewById(R.id.add_phone);
@@ -98,6 +99,17 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
                 groupAdapter = new GroupAdapter(groups, this);
                 groupRecyclerView.setAdapter(groupAdapter);
                 groupAdapter.notifyDataSetChanged();
+            });
+
+            supprimer.setOnClickListener(v -> {
+                contactViewModel.deletePerson(contact.getId());
+
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.nav_host_fragment_activity_main, this)
+                        .addToBackStack(null)
+                        .commit();
             });
 
             addMail.setOnClickListener(v -> {

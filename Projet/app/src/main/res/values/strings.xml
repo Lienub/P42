@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Projet</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Contacts</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Groups</string>
     <string name="mail_addresses">Mail Addresses :</string>
     <string name="postal_addresses">Postal Addresses :</string>
     <string name="phones">Phones :</string>
@@ -21,6 +21,7 @@
     <string name="liste_des_groupe_de_ce_contact">Liste des groupe de ce contact</string>
     <string name="entrez_votre_addresse_mail">Entrez votre addresse mail :</string>
     <string name="example_example_com">example@example.com</string>
+    <string name="supprimer">Supprimer</string>
     <string-array name="label">
         <item>home</item>
         <item>work</item>

@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private static MainActivity instance;
 
-    ArrayList<Contact> contacts;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +44,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        // Récupération du RV
-        //RecyclerView recyclerView = findViewById(R.id.recyclerview);
-
-        // Création de la liste de contacts
-        //List<Item> items = new ArrayList<Item>();
-
-
-        // Set des besoins du RV
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //recyclerView.setAdapter(new MyAdapter(items));
 
     }
 
