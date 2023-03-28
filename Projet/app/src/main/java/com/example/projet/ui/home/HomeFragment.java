@@ -1,6 +1,5 @@
 package com.example.projet.ui.home;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.RequestQueue;
-import com.example.projet.view.MyAdapter;
+import com.example.projet.ui.contact.ContactFragment;
 import com.example.projet.R;
 import com.example.projet.view.RecyclerViewInterface;
 import com.example.projet.databinding.FragmentHomeBinding;
@@ -26,17 +24,15 @@ import com.example.projet.viewmodel.*;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements RecyclerViewInterface {
-    RequestQueue instance = null;
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
     private List<Contact> contacts;
-    private MyAdapter adapter;
+    private HomeAdapter adapter;
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        Log.d("TEST", "onCreateView: ");
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
@@ -53,13 +49,13 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view,savedInstanceState);
-        Log.d("TEST", "onViewCreated: ");
 
         recyclerView = view.findViewById(R.id.recyclerview);
         AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
         model.getContacts().observe(getViewLifecycleOwner(), contacts -> {
-            Log.d("TEST", "onViewCreated: contacts : " + contacts);
-            adapter = new MyAdapter(contacts, this);
+            this.contacts = contacts;
+            Log.d("TEST", "onViewCreated: " + contacts);
+            adapter = new HomeAdapter(contacts, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -73,11 +69,15 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
 
     @Override
     public void onItemClick(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Coucou Julien");
-        builder.setCancelable(false);
+       ContactFragment contactFragment = new ContactFragment(contacts.get(position));
 
-        AlertDialog alert = builder.create();
-        alert.show();
+       getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, contactFragment)
+                .addToBackStack(null)
+                .commit();
+
+
+
     }
 }

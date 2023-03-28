@@ -1,9 +1,12 @@
 package com.example.projet.model;
 
+import android.util.Log;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Contact {
+public class Contact implements Serializable {
 
     private List<Group> groups;
 
@@ -20,6 +23,10 @@ public class Contact {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+
+        mail_addresses = new ArrayList<MailAddress>();
+        postal_addresses = new ArrayList<PostalAddress>();
+        phone_numbers = new ArrayList<Phone>();
     }
 
     public static ArrayList<Contact> createContactsList(int i) {

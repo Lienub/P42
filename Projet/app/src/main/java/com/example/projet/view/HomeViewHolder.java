@@ -9,24 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projet.Item;
 import com.example.projet.R;
 
-public class MyViewHolder extends RecyclerView.ViewHolder
+public class HomeViewHolder extends RecyclerView.ViewHolder
 
     {
-    TextView surname;
-    TextView name;
-    public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recycclerViewInterface) {
+    public TextView firstname;
+    public TextView lastname;
+    public HomeViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
         super(itemView);
-        name = itemView.findViewById(R.id.name);
-        surname = itemView.findViewById(R.id.surname);
+        lastname = itemView.findViewById(R.id.name);
+        firstname = itemView.findViewById(R.id.surname);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recycclerViewInterface != null) {
+                if (recyclerViewInterface != null) {
                     int pos = getAdapterPosition();
 
                     if (pos != RecyclerView.NO_POSITION) {
-                        recycclerViewInterface.onItemClick(pos);
+                        recyclerViewInterface.onItemClick(pos);
                     }
 
                 }
@@ -34,7 +34,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder
     }
 
     void display(Item item){
-        name.setText(item.getName());
-        surname.setText(item.getsurname());
+        lastname.setText(item.getName());
+        firstname.setText(item.getsurname());
     }
 }

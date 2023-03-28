@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         instance = this;
-        Log.d("TEST", "onCreate: ");
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -60,10 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         //recyclerView.setAdapter(new MyAdapter(items));
 
-    }
-
-    public static synchronized MainActivity getInstance() {
-        return instance;
     }
 
     public static Context getContext() {
