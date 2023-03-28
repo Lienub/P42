@@ -29,15 +29,23 @@ public class AddressBookViewModel extends ViewModel {
 
     public LiveData<List<Contact>> getContacts() {
         if (contacts == null) {
-            contacts = new MutableLiveData<>();
+            contacts = new MutableLiveData<>(new ArrayList<>());
             loadContacts();
+        }
+        return contacts;
+    }
+
+    public LiveData<List<Contact>> getContactsFromGroup(Group group){
+        if (contacts == null) {
+            contacts = new MutableLiveData<>(new ArrayList<>());
+            loadContactsFromGroup(group);
         }
         return contacts;
     }
 
     public LiveData<List<Group>> getGroups() {
         if (groups == null) {
-            groups = new MutableLiveData<List<Group>>();
+            groups = new MutableLiveData<>(new ArrayList<>());
             loadGroups();
         }
         return groups;
@@ -110,6 +118,39 @@ public class AddressBookViewModel extends ViewModel {
         );
 
         instance.add(groupRequest);
+    }
+
+    private void loadContactsFromGroup(Group group) {
+        JsonArrayRequest contactRequest = new JsonArrayRequest(
+                apiBasename + "/group/" + group.getId() + "/people",
+                response -> {
+                    List<Contact> contacts = new ArrayList<>();
+                    try {
+                        if (response.length() == 0) {
+                            Log.d("TEST", "no contacts");
+                            return;
+                        }
+
+                        for (int i = 0; i < response.length(); i++) {
+
+                            contacts.add(new Contact(
+                                    response.getJSONObject(i).getString("id"),
+                                    response.getJSONObject(i).getString("firstname"),
+                                    response.getJSONObject(i).getString("lastname")
+                            ));
+                        }
+                        this.contacts.setValue(contacts);
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.d("JSON", error.toString());
+                }
+        );
+
+        instance.add(contactRequest);
     }
 
 }

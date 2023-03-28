@@ -14,4 +14,8 @@
     <string name="phone_label">Label</string>
     <string name="mail_address">Address</string>
     <string name="mail_label">Label</string>
+    <string name="contact">Contact</string>
+    <string name="liste_des_contacts">Liste des contacts</string>
+    <string name="liste_des_groupes">Liste des groupes</string>
+    <string name="liste_contact_of_group">Liste des contacts du groupe</string>
 </resources>

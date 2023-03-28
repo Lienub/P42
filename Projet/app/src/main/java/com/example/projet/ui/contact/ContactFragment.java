@@ -19,6 +19,7 @@ import com.example.projet.view.RecyclerViewInterface;
 import com.example.projet.viewmodel.InfosViewModel;
 
 public class ContactFragment extends Fragment implements RecyclerViewInterface {
+        private TextView name;
         private RecyclerView mailRecyclerView, phoneRecyclerView, postalRecyclerView;
         private Contact contact;
 
@@ -37,6 +38,9 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
 
             View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
+            name = view.findViewById(R.id.contact_name);
+            name.setText(contact.getFirstname()+" "+contact.getLastname());
+
             mailRecyclerView = view.findViewById(R.id.recycler_mail);
             phoneRecyclerView = view.findViewById(R.id.recycler_phone);
             postalRecyclerView = view.findViewById(R.id.recycler_post);
@@ -49,25 +53,33 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
             phoneRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             postalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            mailRecyclerView.setAdapter(mailAdapter);
-            phoneRecyclerView.setAdapter(phoneAdapter);
-            postalRecyclerView.setAdapter(postalAdapter);
-
             contactViewModel = new ViewModelProvider(this).get(InfosViewModel.class);
 
             contactViewModel.getMailAddresses(contact).observe(getViewLifecycleOwner(), mailAddresses -> {
                 Log.d("TEST", "onCreateView: " + contact);
                 Log.d("TEST", "onCreateView: " + mailAddresses);
                 mailAdapter.setMailAddresses(mailAddresses);
+                mailRecyclerView.setAdapter(mailAdapter);
+                mailAdapter.notifyDataSetChanged();
             });
 
             contactViewModel.getPhones(contact).observe(getViewLifecycleOwner(), phoneNumbers -> {
+                Log.d("TEST", "onCreateView: " + contact);
+                Log.d("TEST", "onCreateView: " + phoneNumbers);
                 phoneAdapter.setPhones(phoneNumbers);
+                phoneRecyclerView.setAdapter(phoneAdapter);
+                phoneAdapter.notifyDataSetChanged();
             });
 
             contactViewModel.getPostalAddresses(contact).observe(getViewLifecycleOwner(), postalAddresses -> {
+                Log.d("TEST", "onCreateView: " + contact);
+                Log.d("TEST", "onCreateView: " + postalAddresses);
                 postalAdapter.setPostalAddresses(postalAddresses);
+                postalRecyclerView.setAdapter(postalAdapter);
+                postalAdapter.notifyDataSetChanged();
             });
+
+
 
             return view;
         }
@@ -80,7 +92,7 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
 
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(int position, int type) {
 
     }
 }

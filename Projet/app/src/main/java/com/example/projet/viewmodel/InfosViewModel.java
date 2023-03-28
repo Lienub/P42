@@ -33,14 +33,11 @@ public class InfosViewModel extends ViewModel {
     private MutableLiveData<List<PostalAddress>> postalAddresses;
     private MutableLiveData<List<Phone>> phones;
 
-    public InfosViewModel() {
-        mailAddresses = new MutableLiveData<>(new ArrayList<>());
-        postalAddresses = new MutableLiveData<>(new ArrayList<>());
-        phones = new MutableLiveData<>(new ArrayList<>());
-    }
     public LiveData<List<MailAddress>> getMailAddresses(Contact contact) {
+        Log.d("TEST", "getMailAddresses called");
         if (mailAddresses == null) {
-            mailAddresses = new MutableLiveData<>();
+            mailAddresses = new MutableLiveData<>(new ArrayList<>());
+
             loadMailAddresses(contact);
         }
 
@@ -50,26 +47,31 @@ public class InfosViewModel extends ViewModel {
 
     public LiveData<List<PostalAddress>> getPostalAddresses(Contact contact) {
         if (postalAddresses == null) {
-            postalAddresses = new MutableLiveData<>();
+            postalAddresses = new MutableLiveData<>(new ArrayList<>());
             loadPostalAddresses(contact);
         }
+        Log.d("TEST", "postalAddresses : " + postalAddresses.getValue().toString()  );
         return postalAddresses;
     }
 
     public LiveData<List<Phone>> getPhones(Contact contact) {
         if (phones == null) {
-            phones = new MutableLiveData<>();
+            phones = new MutableLiveData<>(new ArrayList<>());
             loadPhones(contact);
         }
+
+        Log.d("TEST", "phones : " + phones.getValue().toString()  );
         return phones;
     }
     private void loadMailAddresses(Contact contact) {
+
         JsonArrayRequest mailRequest = new JsonArrayRequest(
                 apiBasename + "/person/" + contact.getId() + "/mailAddress",
                 response -> {
+                    Log.d("TEST", "loadMailAddresses");
                     try {
                         if(response.length() == 0) {
-                            Log.d("TEST", "no contacts");
+                            Log.d("TEST", "no mail address");
                             return;
                         }
                         List<MailAddress> mailAddresses = new ArrayList<>();
@@ -86,7 +88,7 @@ public class InfosViewModel extends ViewModel {
                         for (MailAddress mailAddress : mailAddresses) {
                             contact.addMailAddress(mailAddress);
                         }
-                        
+
                         this.mailAddresses.postValue(mailAddresses);
 
 

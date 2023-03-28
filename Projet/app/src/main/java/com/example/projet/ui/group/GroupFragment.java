@@ -1,4 +1,4 @@
-package com.example.projet.ui.home;
+package com.example.projet.ui.group;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,28 +14,29 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projet.R;
+import com.example.projet.databinding.FragmentHomeBinding;
+import com.example.projet.model.Contact;
+import com.example.projet.model.Group;
 import com.example.projet.ui.contact.ContactAdapter;
 import com.example.projet.ui.contact.ContactFragment;
-import com.example.projet.R;
-import com.example.projet.ui.group.GroupAdapter;
-import com.example.projet.ui.group.GroupFragment;
+import com.example.projet.ui.home.HomeViewModel;
 import com.example.projet.view.RecyclerViewInterface;
-import com.example.projet.databinding.FragmentHomeBinding;
-import com.example.projet.model.*;
-import com.example.projet.viewmodel.*;
+import com.example.projet.viewmodel.AddressBookViewModel;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements RecyclerViewInterface {
+public class GroupFragment extends Fragment implements RecyclerViewInterface {
     private FragmentHomeBinding binding;
     private RecyclerView contactRecyclerView;
-    private RecyclerView groupRecyclerView;
+    private Group group;
     private List<Contact> contacts;
-    private List<Group> groups;
     private ContactAdapter contactAdapter;
-    private GroupAdapter groupAdapter;
 
 
+    public GroupFragment(Group group) {
+        this.group = group;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,22 +60,12 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         contactRecyclerView = view.findViewById(R.id.contact_recyclerview);
 
         AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
-        model.getContacts().observe(getViewLifecycleOwner(), contacts -> {
+        model.getContactsFromGroup(group).observe(getViewLifecycleOwner(), contacts -> {
             this.contacts = contacts;
-            Log.d("TEST", "onViewCreated: " + contacts);
             contactAdapter = new ContactAdapter(contacts, this);
             contactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
             contactRecyclerView.setAdapter(contactAdapter);
             contactAdapter.notifyDataSetChanged();
-        });
-        groupRecyclerView = view.findViewById(R.id.group_recyclerview);
-        model.getGroups().observe(getViewLifecycleOwner(), groups -> {
-            this.groups = groups;
-            Log.d("TEST", "onViewCreated: " + groups);
-            groupAdapter = new GroupAdapter(groups, this);
-            groupRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-            groupRecyclerView.setAdapter(groupAdapter);
-            groupAdapter.notifyDataSetChanged();
         });
     }
     @Override
@@ -85,25 +76,13 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
 
     @Override
     public void onItemClick(int position, int type) {
-        if (type == 1){
-            ContactFragment contactFragment = new ContactFragment(contacts.get(position));
+        ContactFragment contactFragment = new ContactFragment(contacts.get(position));
 
-            getParentFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, contactFragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
-
-        else if (type == 2){
-            GroupFragment groupFragment = new GroupFragment(groups.get(position));
-
-            getParentFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, groupFragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, contactFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

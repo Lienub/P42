@@ -1,5 +1,6 @@
 package com.example.projet.ui.contact;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,11 @@ import com.example.projet.model.Phone;
 import com.example.projet.view.PhoneViewHolder;
 import com.example.projet.view.RecyclerViewInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneAdapter extends RecyclerView.Adapter<PhoneViewHolder> {
-    List<Phone> phones;
+    List<Phone> phones = new ArrayList<>();
     public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
