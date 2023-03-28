@@ -1,7 +1,6 @@
-package com.example.projet.ui.home;
+package com.example.projet.ui.contact;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +13,29 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projet.R;
+import com.example.projet.databinding.FragmentHomeBinding;
+import com.example.projet.model.Contact;
+import com.example.projet.model.Group;
 import com.example.projet.ui.contact.ContactAdapter;
 import com.example.projet.ui.contact.ContactFragment;
-import com.example.projet.R;
+import com.example.projet.ui.home.HomeViewModel;
 import com.example.projet.view.RecyclerViewInterface;
-import com.example.projet.databinding.FragmentHomeBinding;
-import com.example.projet.model.*;
-import com.example.projet.viewmodel.*;
+import com.example.projet.viewmodel.AddressBookViewModel;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements RecyclerViewInterface {
+public class ContactGroupsFragment extends Fragment implements RecyclerViewInterface {
     private FragmentHomeBinding binding;
     private RecyclerView contactRecyclerView;
+    private Group group;
     private List<Contact> contacts;
     private ContactAdapter contactAdapter;
 
 
+    public ContactGroupsFragment(Group group) {
+        this.group = group;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,9 +59,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
         contactRecyclerView = view.findViewById(R.id.contact_recyclerview);
 
         AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
-        model.getContacts().observe(getViewLifecycleOwner(), contacts -> {
+        model.getContactsFromGroup(group).observe(getViewLifecycleOwner(), contacts -> {
             this.contacts = contacts;
-            Log.d("TEST", "onViewCreated: " + contacts);
             contactAdapter = new ContactAdapter(contacts, this);
             contactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
             contactRecyclerView.setAdapter(contactAdapter);
@@ -71,16 +75,14 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
 
     @Override
     public void onItemClick(int position, int type) {
-        if (type == 1){
-            ContactFragment contactFragment = new ContactFragment(contacts.get(position));
+        ContactFragment contactFragment = new ContactFragment(contacts.get(position));
 
-            getParentFragmentManager()
-                    .beginTransaction()
-                    .setReorderingAllowed(true)
-                    .replace(R.id.nav_host_fragment_activity_main, contactFragment)
-                    .addToBackStack(null)
-                    .commit();
-        }
+        getParentFragmentManager()
+                .beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.nav_host_fragment_activity_main, contactFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

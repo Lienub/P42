@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet.R;
 import com.example.projet.model.MailAddress;
-import com.example.projet.view.MailViewHolder;
-import com.example.projet.view.RecyclerViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +16,9 @@ import java.util.List;
 public class MailAdapter extends RecyclerView.Adapter<MailViewHolder> {
     List<MailAddress> mail_addresses = new ArrayList<>();
 
-    public void setMailAddresses(List<MailAddress> mail_addresses) {
+    public MailAdapter(List<MailAddress> mail_addresses) {
         this.mail_addresses = mail_addresses;
+
     }
     @NonNull
     @Override

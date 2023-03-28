@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet.R;
 import com.example.projet.model.*;
-import com.example.projet.view.ContactViewHolder;
 import com.example.projet.view.RecyclerViewInterface;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.utme_view, parent, false);
+        View view = inflater.inflate(R.layout.contact_view, parent, false);
         return new ContactViewHolder(view, recyclerViewInterface);
     }
 

@@ -1,4 +1,4 @@
-package com.example.projet.view;
+package com.example.projet.ui.contact;
 
 import android.view.View;
 import android.widget.TextView;

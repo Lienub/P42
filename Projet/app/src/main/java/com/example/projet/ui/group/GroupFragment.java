@@ -1,73 +1,57 @@
 package com.example.projet.ui.group;
 
+import android.location.Address;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet.R;
-import com.example.projet.databinding.FragmentHomeBinding;
-import com.example.projet.model.Contact;
+import com.example.projet.databinding.FragmentGroupBinding;
 import com.example.projet.model.Group;
-import com.example.projet.ui.contact.ContactAdapter;
-import com.example.projet.ui.contact.ContactFragment;
-import com.example.projet.ui.home.HomeViewModel;
+import com.example.projet.ui.contact.ContactGroupsFragment;
 import com.example.projet.view.RecyclerViewInterface;
 import com.example.projet.viewmodel.AddressBookViewModel;
 
 import java.util.List;
 
 public class GroupFragment extends Fragment implements RecyclerViewInterface {
-    private FragmentHomeBinding binding;
-    private RecyclerView contactRecyclerView;
-    private Group group;
-    private List<Contact> contacts;
-    private ContactAdapter contactAdapter;
 
+        private FragmentGroupBinding binding;
 
-    public GroupFragment(Group group) {
-        this.group = group;
-    }
+        private List<Group> groups;
+        private GroupAdapter groupAdapter;
+        private RecyclerView groupRecyclerView;
+        AddressBookViewModel addressBookViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        final TextView textView = binding.textHome;
-        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        View view = inflater.inflate(R.layout.fragment_group, container, false);
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        View root = binding.getRoot();
-        return root;
-    }
+        groupRecyclerView = view.findViewById(R.id.group_recyclerview);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    {
-        super.onViewCreated(view,savedInstanceState);
+        groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        contactRecyclerView = view.findViewById(R.id.contact_recyclerview);
+        addressBookViewModel = new ViewModelProvider(this).get(AddressBookViewModel.class);
 
-        AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
-        model.getContactsFromGroup(group).observe(getViewLifecycleOwner(), contacts -> {
-            this.contacts = contacts;
-            contactAdapter = new ContactAdapter(contacts, this);
-            contactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-            contactRecyclerView.setAdapter(contactAdapter);
-            contactAdapter.notifyDataSetChanged();
+        addressBookViewModel.getGroups().observe(getViewLifecycleOwner(), groups -> {
+            this.groups = groups;
+            groupAdapter = new GroupAdapter(groups, this);
+            groupRecyclerView.setAdapter(groupAdapter);
+            groupAdapter.notifyDataSetChanged();
         });
+
+        return view;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -76,13 +60,13 @@ public class GroupFragment extends Fragment implements RecyclerViewInterface {
 
     @Override
     public void onItemClick(int position, int type) {
-        ContactFragment contactFragment = new ContactFragment(contacts.get(position));
+        ContactGroupsFragment contactGroup = new ContactGroupsFragment(groups.get(position));
 
         getParentFragmentManager()
                 .beginTransaction()
-                .replace(R.id.nav_host_fragment_activity_main, contactFragment)
+                .setReorderingAllowed(true)
+                .replace(R.id.nav_host_fragment_activity_main, contactGroup)
                 .addToBackStack(null)
                 .commit();
     }
-
 }

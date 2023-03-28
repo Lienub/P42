@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.contact.ContactFragment">
+    tools:context=".ui.group.GroupFragment">
 
     <TextView
-        android:id="@+id/contact_list"
+        android:id="@+id/group_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/liste_contact_of_group" />
+        android:text="@string/liste_des_groupes" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/group_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/contact_list"
-        android:id="@+id/contact_recyclerview">
-    </androidx.recyclerview.widget.RecyclerView>
-
+        android:layout_below="@id/group_list" />
 </RelativeLayout>

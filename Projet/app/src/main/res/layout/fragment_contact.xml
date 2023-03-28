@@ -25,15 +25,23 @@
         android:id="@+id/recycler_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxHeight="50dp"
         android:layout_below="@id/mail_list">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/add_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_mail"
+        android:text="New EMAIL" />
 
     <TextView
         android:id="@+id/postal_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_mail"
+        android:layout_below="@id/add_mail"
         android:text="@string/postal_addresses" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -44,11 +52,18 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/add_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_post"
+        android:text="New ADDRESS" />
+
     <TextView
         android:id="@+id/phone_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recycler_post"
+        android:layout_below="@id/add_post"
         android:text="@string/phones" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -58,5 +73,29 @@
         android:layout_below="@id/phone_list">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/add_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_phone"
+        android:text="New NUMBER" />
+
+    <TextView
+        android:id="@+id/group_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_phone"
+        android:text="@string/liste_des_groupe_de_ce_contact" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/group_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 
 </RelativeLayout>

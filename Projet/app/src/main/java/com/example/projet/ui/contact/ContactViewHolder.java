@@ -1,4 +1,4 @@
-package com.example.projet.view;
+package com.example.projet.ui.contact;
 
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet.Item;
 import com.example.projet.R;
+import com.example.projet.view.RecyclerViewInterface;
 
 public class ContactViewHolder extends RecyclerView.ViewHolder
 

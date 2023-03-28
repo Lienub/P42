@@ -1,6 +1,5 @@
 package com.example.projet.ui.contact;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projet.R;
 import com.example.projet.model.PostalAddress;
-import com.example.projet.view.PostalViewHolder;
-import com.example.projet.view.RecyclerViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
 public class PostalAdapter extends RecyclerView.Adapter<PostalViewHolder> {
     List<PostalAddress> postal_addresses = new ArrayList<>();
 
-    public void setPostalAddresses(List<PostalAddress> postal_addresses) {
+    public PostalAdapter(List<PostalAddress> postal_addresses) {
         this.postal_addresses = postal_addresses;
     }
 

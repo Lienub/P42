@@ -18,4 +18,11 @@
     <string name="liste_des_contacts">Liste des contacts</string>
     <string name="liste_des_groupes">Liste des groupes</string>
     <string name="liste_contact_of_group">Liste des contacts du groupe</string>
+    <string name="liste_des_groupe_de_ce_contact">Liste des groupe de ce contact</string>
+    <string name="entrez_votre_addresse_mail">Entrez votre addresse mail :</string>
+    <string name="example_example_com">example@example.com</string>
+    <string-array name="label">
+        <item>home</item>
+        <item>work</item>
+    </string-array>
 </resources>

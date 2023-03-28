@@ -34,18 +34,5 @@
         android:id="@+id/contact_recyclerview">
     </androidx.recyclerview.widget.RecyclerView>
 
-    <TextView
-        android:id="@+id/group_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/contact_recyclerview"
-        android:text="@string/liste_des_groupes" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/group_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_below="@id/group_list"
-        android:layout_height="wrap_content" />
-
 
 </RelativeLayout>

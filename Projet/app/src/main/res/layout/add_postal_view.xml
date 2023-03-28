@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/postal_address_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entrez votre addresse :" />
+
+    <EditText
+        android:id="@+id/postal_address_input"
+        android:layout_width="match_parent"
+        android:maxWidth="488dp"
+        android:layout_height="50dp"
+        android:hint="Addresse"
+        android:layout_below="@id/postal_address_desc"
+        android:layout_marginBottom="55dp"
+        tools:layout_editor_absoluteX="255dp"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/postal_city_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postal_address_input"
+        android:text="Entrez la ville :" />
+
+    <EditText
+        android:id="@+id/postal_city_input"
+        android:layout_width="match_parent"
+        android:maxWidth="488dp"
+        android:layout_height="50dp"
+        android:hint="Ville"
+        android:layout_below="@id/postal_city_desc"
+        android:layout_marginBottom="55dp"
+        tools:layout_editor_absoluteX="255dp"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/postal_country_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postal_city_input"
+        android:text="Entrez le pays :" />
+
+    <EditText
+        android:id="@+id/postal_country_input"
+        android:layout_width="match_parent"
+        android:maxWidth="488dp"
+        android:layout_height="50dp"
+        android:hint="Pays"
+        android:layout_below="@id/postal_country_desc"
+        android:layout_marginBottom="55dp"
+        tools:layout_editor_absoluteX="255dp"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/postal_label_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postal_country_input"
+        android:text="Type :" />
+
+    <Spinner
+        android:id="@+id/postal_label_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:contentDescription="Type"
+        android:layout_below="@id/postal_label_desc" />
+
+    <Button
+        android:id="@+id/postal_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postal_label_list"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="150dp"
+        android:text="Valider" />
+
+</RelativeLayout>
