@@ -14,13 +14,6 @@
         android:textSize="20sp"
         android:text="@string/contact" />
 
-    <Button
-        android:id="@+id/delete_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="160dp"
-        android:text="@string/supprimer" />
 
     <TextView
         android:id="@+id/mail_list"
@@ -32,7 +25,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:maxHeight="50dp"
         android:layout_below="@id/mail_list">
 
@@ -55,7 +48,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_post"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/postal_list">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -77,7 +70,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_phone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/phone_list">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -99,7 +92,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_below="@id/group_list">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -117,6 +110,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_group"
         android:text="AJOUTER LE CONTACT AU GROUPE" />
-    />
+
+    <Button
+        android:id="@+id/delete_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_group"
+        android:text="@string/supprimer" />
 
 </RelativeLayout>

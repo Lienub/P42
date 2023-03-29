@@ -40,10 +40,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        final TextView textView = binding.textHome;
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         View root = binding.getRoot();
         return root;
     }

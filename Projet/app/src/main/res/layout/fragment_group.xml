@@ -15,7 +15,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/group_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_below="@id/group_list" />
 
     <Button

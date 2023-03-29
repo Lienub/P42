@@ -199,6 +199,8 @@ public class AddressBookViewModel extends ViewModel {
                             Log.d("TEST", "no groups");
                         }
 
+
+
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

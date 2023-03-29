@@ -67,6 +67,12 @@ public class GroupFragment extends Fragment implements RecyclerViewInterface {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        groupAdapter.notifyDataSetChanged();
+
+    }
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
