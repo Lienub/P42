@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/mail_address_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/entrez_votre_addresse_mail" />
+
+    <EditText
+        android:id="@+id/mail_address_input"
+        android:layout_width="match_parent"
+        android:maxWidth="488dp"
+        android:layout_height="50dp"
+        android:hint="@string/example_example_com"
+        android:layout_below="@id/mail_address_desc"
+        android:layout_marginBottom="155dp"
+
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="255dp"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/mail_label_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mail_address_input"
+        android:text="@string/entrez_votre_addresse_mail" />
+
+    <Spinner
+        android:id="@+id/mail_label_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:contentDescription="@string/type"
+        android:layout_below="@id/mail_label_desc" />
+
+    <Button
+        android:id="@+id/mail_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mail_label_list"
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="150dp"
+        android:text="@string/valider" />
+
+</RelativeLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/phone_number_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entrez votre numéro de téléphone" />
+
+    <EditText
+        android:id="@+id/phone_number_input"
+        android:layout_width="match_parent"
+        android:maxWidth="488dp"
+        android:layout_height="50dp"
+        android:hint="06 XX XX XX XX"
+        android:layout_below="@id/phone_number_desc"
+        android:layout_marginBottom="155dp"
+        android:inputType="phone"
+        tools:layout_editor_absoluteX="255dp"
+        android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/phone_label_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_number_input"
+        android:text="Type :" />
+
+    <Spinner
+        android:id="@+id/phone_label_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:contentDescription="Type"
+        android:layout_below="@id/phone_label_desc" />
+
+    <Button
+        android:id="@+id/phone_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phone_label_list"
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="150dp"
+        android:text="Valider" />
+
+</RelativeLayout>

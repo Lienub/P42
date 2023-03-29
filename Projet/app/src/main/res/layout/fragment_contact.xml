@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.contact.ContactFragment">
+
+    <TextView
+        android:id="@+id/contact_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="@string/contact" />
+
+
+    <TextView
+        android:id="@+id/mail_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contact_name"
+        android:text="@string/mail_addresses" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_mail"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:maxHeight="50dp"
+        android:layout_below="@id/mail_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/add_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_mail"
+        android:text="New EMAIL" />
+
+    <TextView
+        android:id="@+id/postal_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_mail"
+        android:text="@string/postal_addresses" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_post"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/postal_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/add_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_post"
+        android:text="New ADDRESS" />
+
+    <TextView
+        android:id="@+id/phone_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_post"
+        android:text="@string/phones" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_phone"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/phone_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/add_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_phone"
+        android:text="New NUMBER" />
+
+    <TextView
+        android:id="@+id/group_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_phone"
+        android:text="@string/liste_des_groupe_de_ce_contact" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_group"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/group_list">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Spinner
+        android:id="@+id/spinner_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_group" />
+
+
+    <Button
+        android:id="@+id/add_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_group"
+        android:text="AJOUTER LE CONTACT AU GROUPE" />
+
+    <Button
+        android:id="@+id/delete_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_group"
+        android:text="@string/supprimer" />
+
+</RelativeLayout>

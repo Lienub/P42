@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Projet</string>
+    <string name="title_home">Contacts</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Groups</string>
+    <string name="mail_addresses">Mail Addresses :</string>
+    <string name="postal_addresses">Postal Addresses :</string>
+    <string name="phones">Phones :</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="label">Label</string>
+    <string name="number">Number</string>
+    <string name="phone_label">Label</string>
+    <string name="mail_address">Address</string>
+    <string name="mail_label">Label</string>
+    <string name="contact">Contact</string>
+    <string name="liste_des_contacts">Liste des contacts</string>
+    <string name="liste_des_groupes">Liste des groupes</string>
+    <string name="liste_contact_of_group">Liste des contacts du groupe</string>
+    <string name="liste_des_groupe_de_ce_contact">Liste des groupe de ce contact</string>
+    <string name="entrez_votre_addresse_mail">Entrez votre addresse mail :</string>
+    <string name="example_example_com">example@example.com</string>
+    <string name="supprimer">Supprimer</string>
+    <string name="type">Type</string>
+    <string name="valider">Valider</string>
+    <string-array name="label">
+        <item>home</item>
+        <item>work</item>
+    </string-array>
+</resources>

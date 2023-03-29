@@ -10,7 +10,8 @@ Rendu
 - Où ? Sur votre dépôt Git, fork de https://git.unistra.fr/p42/p42
 - Quoi ?
     - Le code de l'application
-    - Un petit compte-rendu expliquant votre architecture, ce qui est censé fonctionner et ne pas fonctionner, les difficultés que vous avez rencontré.
+    - Un petit [compte-rendu](Compte-Rendu.md) expliquant votre architecture, ce qui est censé fonctionner et ne pas fonctionner, les difficultés que vous avez rencontré.
+    
 
 Les tests de votre appli seront réalisés à partir d'une solution fonctionnelle du dernier TP (TP5) de W41. Il est donc important que votre version à vous respecte le cahier des charges des TP de ce module.
 
