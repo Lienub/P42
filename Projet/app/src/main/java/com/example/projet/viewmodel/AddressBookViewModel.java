@@ -15,10 +15,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.projet.model.*;
 import com.example.projet.ui.contact.ContactFragment;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,14 @@ public class AddressBookViewModel extends ViewModel {
             loadContacts();
         }
         return contacts;
+    }
+
+    public void addContact(String firstname, String lastname){
+        sendAddContact(firstname, lastname);
+    }
+
+    public void addGroup(String name){
+        sendAddGroup(name);
     }
 
     public LiveData<List<Contact>> getContactsFromGroup(Group group){
@@ -102,6 +113,42 @@ public class AddressBookViewModel extends ViewModel {
         instance.add(contactRequest);
     }
 
+    public void sendAddContact(String firstname, String lastname) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("firstname", firstname);
+            json.put("lastname", lastname);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Log.d("JSON", json.toString());
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                apiBasename + "/person",
+                json,
+                response -> {
+
+                    Log.d("TEST", "contacts: " + contacts);
+
+                    try {
+                        if(response == null || response.length() == 0) {
+                            Log.d("TEST", "no contacts");
+                        }
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.d("JSON", error.toString());
+                }
+        );
+
+        instance.add(request);
+    }
+
     public void loadGroups() {
         JsonArrayRequest groupRequest = new JsonArrayRequest(
                 apiBasename + "/group",
@@ -132,6 +179,36 @@ public class AddressBookViewModel extends ViewModel {
         );
 
         instance.add(groupRequest);
+    }
+
+    public void sendAddGroup(String title) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("title", title);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                apiBasename + "/group",
+                json,
+                response -> {
+                    try {
+                        if(response.length() == 0) {
+                            Log.d("TEST", "no groups");
+                        }
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                error -> {
+                    Log.d("JSON", error.toString());
+                }
+        );
+
+        instance.add(request);
     }
 
     private void loadContactsFromGroup(Group group) {

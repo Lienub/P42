@@ -40,6 +40,9 @@ public class ContactGroupsFragment extends Fragment implements RecyclerViewInter
         this.group = group;
     }
 
+    public ContactGroupsFragment() {
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

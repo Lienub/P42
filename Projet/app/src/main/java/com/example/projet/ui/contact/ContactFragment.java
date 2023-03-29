@@ -53,6 +53,10 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
             this.contact = contact;
         }
 
+        public ContactFragment() {
+            // Required empty public constructor
+        }
+
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  ViewGroup container, Bundle savedInstanceState) {
 

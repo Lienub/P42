@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,12 +32,16 @@ public class GroupFragment extends Fragment implements RecyclerViewInterface {
         private RecyclerView groupRecyclerView;
         AddressBookViewModel addressBookViewModel;
 
+        public GroupFragment() {
+        }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_group, container, false);
 
         groupRecyclerView = view.findViewById(R.id.group_recyclerview);
+
+        Button addGroup = view.findViewById(R.id.add_group);
 
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -47,6 +52,15 @@ public class GroupFragment extends Fragment implements RecyclerViewInterface {
             groupAdapter = new GroupAdapter(groups, this);
             groupRecyclerView.setAdapter(groupAdapter);
             groupAdapter.notifyDataSetChanged();
+        });
+
+        addGroup.setOnClickListener(v -> {
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.nav_host_fragment_activity_main, new AddGroupFragment(this))
+                    .addToBackStack(null)
+                    .commit();
         });
 
         return view;

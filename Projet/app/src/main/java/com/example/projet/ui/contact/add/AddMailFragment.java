@@ -29,6 +29,10 @@ public class AddMailFragment extends Fragment {
         this.contact = contact;
     }
 
+    public AddMailFragment() {
+        this.contact = null;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

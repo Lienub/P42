@@ -29,6 +29,10 @@ public class AddPhoneFragment extends Fragment {
         this.contact = contact;
     }
 
+    public AddPhoneFragment() {
+        this.contact = null;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

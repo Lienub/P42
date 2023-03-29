@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projet.ui.contact.ContactAdapter;
 import com.example.projet.ui.contact.ContactFragment;
 import com.example.projet.R;
+import com.example.projet.ui.contact.add.AddContactFragment;
 import com.example.projet.view.RecyclerViewInterface;
 import com.example.projet.databinding.FragmentHomeBinding;
 import com.example.projet.model.*;
@@ -53,6 +55,8 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
 
         contactRecyclerView = view.findViewById(R.id.contact_recyclerview);
 
+        Button addContact = view.findViewById(R.id.add_contact);
+
         AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
         model.getContacts().observe(getViewLifecycleOwner(), contacts -> {
             this.contacts = contacts;
@@ -61,6 +65,16 @@ public class HomeFragment extends Fragment implements RecyclerViewInterface {
             contactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
             contactRecyclerView.setAdapter(contactAdapter);
             contactAdapter.notifyDataSetChanged();
+        });
+
+        addContact.setOnClickListener(v -> {
+            AddContactFragment addContactFragment = new AddContactFragment(this);
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.nav_host_fragment_activity_main, addContactFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
     }
     @Override

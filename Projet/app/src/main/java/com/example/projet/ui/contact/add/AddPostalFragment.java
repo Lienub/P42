@@ -31,6 +31,10 @@ public class AddPostalFragment extends Fragment {
         this.contact = contact;
     }
 
+    public AddPostalFragment() {
+        this.contact = null;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

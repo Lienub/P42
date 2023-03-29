@@ -34,5 +34,14 @@
         android:id="@+id/contact_recyclerview">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/add_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp"
+        android:text="ADD NEW CONTACT" />
+
 
 </RelativeLayout>
