@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,9 +22,12 @@ import com.example.projet.ui.contact.add.AddMailFragment;
 import com.example.projet.ui.contact.add.AddPhoneFragment;
 import com.example.projet.ui.contact.add.AddPostalFragment;
 import com.example.projet.ui.group.GroupAdapter;
+import com.example.projet.ui.home.HomeFragment;
 import com.example.projet.view.RecyclerViewInterface;
+import com.example.projet.viewmodel.AddressBookViewModel;
 import com.example.projet.viewmodel.InfosViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactFragment extends Fragment implements RecyclerViewInterface {
@@ -32,10 +36,16 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
         private Contact contact;
         private List<Group> groups;
 
+        public static List<Group> allGroups;
+
         private MailAdapter mailAdapter;
         private PhoneAdapter phoneAdapter;
         private PostalAdapter postalAdapter;
         private GroupAdapter groupAdapter;
+
+    private AddressBookViewModel addressBookViewModel = new AddressBookViewModel();
+        private GroupSpinnerAdapter groupSpinnerAdapter;
+
 
         InfosViewModel contactViewModel;
 
@@ -60,6 +70,9 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
             Button addMail = view.findViewById(R.id.add_mail);
             Button addPostal = view.findViewById(R.id.add_post);
             Button addPhone = view.findViewById(R.id.add_phone);
+            Button addGroup = view.findViewById(R.id.add_group);
+            Spinner groupSpinner = view.findViewById(R.id.spinner_group);
+
 
             mailRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             phoneRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -101,13 +114,48 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
                 groupAdapter.notifyDataSetChanged();
             });
 
-            supprimer.setOnClickListener(v -> {
-                contactViewModel.deletePerson(contact.getId());
+            addressBookViewModel.getGroups(getViewLifecycleOwner()).observe(getViewLifecycleOwner(), groups -> {
+                allGroups = groups;
+                List<String> groupNames = new ArrayList<>();
+                for (Group group : allGroups) {
+                    groupNames.add(group.getTitle());
+                    Log.i("TITRE", group.getTitle());
+                }
+                groupSpinnerAdapter = new GroupSpinnerAdapter(getContext(), groupNames);
+                groupSpinner.setAdapter(groupSpinnerAdapter);
+            });
 
+/*
+            List<String> groupNames = new ArrayList<>();
+            for (Group group : allGroups) {
+                groupNames.add(group.getTitle());
+                Log.i("TITRE", group.getTitle());
+            }*/
+
+
+            supprimer.setOnClickListener(v -> {
+                AddressBookViewModel addressBookViewModel = new AddressBookViewModel();
+                addressBookViewModel.deletePerson(contact.getId());
+
+                HomeFragment homeFragment = new HomeFragment();
                 getParentFragmentManager()
                         .beginTransaction()
                         .setReorderingAllowed(true)
-                        .replace(R.id.nav_host_fragment_activity_main, this)
+                        .replace(R.id.nav_host_fragment_activity_main, homeFragment)
+                        .addToBackStack(null)
+                        .commit();
+            });
+
+            addGroup.setOnClickListener(v -> {
+                AddressBookViewModel addressBookViewModel = new AddressBookViewModel();
+                int a = groupSpinner.getSelectedItemPosition();
+                addressBookViewModel.addPersonToGroup(contact.getId(), allGroups.get(a).getId());
+
+                HomeFragment homeFragment = new HomeFragment();
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.nav_host_fragment_activity_main, homeFragment)
                         .addToBackStack(null)
                         .commit();
             });
@@ -186,7 +234,6 @@ public class ContactFragment extends Fragment implements RecyclerViewInterface {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        com.example.projet.databinding.FragmentContactBinding binding = null;
     }
 
 

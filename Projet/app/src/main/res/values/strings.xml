@@ -22,6 +22,8 @@
     <string name="entrez_votre_addresse_mail">Entrez votre addresse mail :</string>
     <string name="example_example_com">example@example.com</string>
     <string name="supprimer">Supprimer</string>
+    <string name="type">Type</string>
+    <string name="valider">Valider</string>
     <string-array name="label">
         <item>home</item>
         <item>work</item>

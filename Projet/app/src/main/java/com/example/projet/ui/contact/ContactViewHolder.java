@@ -34,9 +34,4 @@ public class ContactViewHolder extends RecyclerView.ViewHolder
                 }
             }});
     }
-
-    void display(Item item){
-        lastname.setText(item.getName());
-        firstname.setText(item.getsurname());
-    }
 }

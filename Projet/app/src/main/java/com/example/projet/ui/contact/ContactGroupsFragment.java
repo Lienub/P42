@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import com.example.projet.model.Contact;
 import com.example.projet.model.Group;
 import com.example.projet.ui.contact.ContactAdapter;
 import com.example.projet.ui.contact.ContactFragment;
+import com.example.projet.ui.group.GroupFragment;
 import com.example.projet.ui.home.HomeViewModel;
 import com.example.projet.view.RecyclerViewInterface;
 import com.example.projet.viewmodel.AddressBookViewModel;
@@ -39,24 +42,17 @@ public class ContactGroupsFragment extends Fragment implements RecyclerViewInter
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        final TextView textView = binding.textHome;
-        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        View view = inflater.inflate(R.layout.fragment_contact_groups, container, false);
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        View root = binding.getRoot();
-        return root;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    {
         super.onViewCreated(view,savedInstanceState);
 
-        contactRecyclerView = view.findViewById(R.id.contact_recyclerview);
+        //ArrayAdapter<CharSequence> test = ArrayAdapter.
+
+
+
+                contactRecyclerView = view.findViewById(R.id.contact_recyclerview);
+        Button deleteGroup = view.findViewById(R.id.delete_group);
 
         AddressBookViewModel model = new ViewModelProvider(this).get(AddressBookViewModel.class);
         model.getContactsFromGroup(group).observe(getViewLifecycleOwner(), contacts -> {
@@ -66,7 +62,20 @@ public class ContactGroupsFragment extends Fragment implements RecyclerViewInter
             contactRecyclerView.setAdapter(contactAdapter);
             contactAdapter.notifyDataSetChanged();
         });
+
+        deleteGroup.setOnClickListener(v -> {
+            model.deleteGroup(group.getId());
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.nav_host_fragment_activity_main, new GroupFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        return view;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

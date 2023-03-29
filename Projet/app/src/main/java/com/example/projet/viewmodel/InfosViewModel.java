@@ -335,7 +335,7 @@ public class InfosViewModel extends ViewModel {
                             ));
                         }
 
-                        this.groups.setValue(groups);
+                        this.groups.postValue(groups);
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);

@@ -4,8 +4,10 @@ import static com.example.projet.MainActivity.getContext;
 
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.android.volley.Request;
@@ -13,24 +15,24 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.projet.model.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.example.projet.ui.contact.ContactFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AddressBookViewModel extends ViewModel {
-    private static final String apiBasename = "https://api.w41.0x2a.pm";
+    private static final String apiBasename = "http://10.0.2.2:3000";
 
     private final RequestQueue instance = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
     private MutableLiveData<List<Contact>> contacts;
     private MutableLiveData<List<Group>> groups;
+
+    // Observe the LiveData and get the value of the list when it changes
+
 
     public LiveData<List<Contact>> getContacts() {
         if (contacts == null) {
@@ -48,11 +50,18 @@ public class AddressBookViewModel extends ViewModel {
         return contacts;
     }
 
-    public LiveData<List<Group>> getGroups() {
+    public  LiveData<List<Group>> getGroups(LifecycleOwner viewLifecycleOwner) {
         if (groups == null) {
             groups = new MutableLiveData<>(new ArrayList<>());
             loadGroups();
         }
+        groups.observe(viewLifecycleOwner , new Observer<List<Group>>() {
+            public void onChanged(List<Group> groups) {
+                // Use the list of groups here
+                ContactFragment.allGroups = groups;
+                // Do something with groupList
+            }
+        });
         return groups;
     }
 
@@ -93,7 +102,7 @@ public class AddressBookViewModel extends ViewModel {
         instance.add(contactRequest);
     }
 
-    private void loadGroups() {
+    public void loadGroups() {
         JsonArrayRequest groupRequest = new JsonArrayRequest(
                 apiBasename + "/group",
                 response -> {
@@ -158,7 +167,7 @@ public class AddressBookViewModel extends ViewModel {
         instance.add(contactRequest);
     }
 
-    private void deletePerson(String idPerson) {
+    public void deletePerson(String idPerson) {
         String url = apiBasename + "/person/" + idPerson;
         StringRequest deletePersonRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
@@ -178,7 +187,7 @@ public class AddressBookViewModel extends ViewModel {
         instance.add(deletePersonRequest);
     }
 
-    private void deleteGroup(String idGroup) {
+    public void deleteGroup(String idGroup) {
         String url = apiBasename + "/group/" + idGroup;
         StringRequest deleteGroupRequest = new StringRequest(Request.Method.DELETE, url,
                 new Response.Listener<String>() {
@@ -218,7 +227,7 @@ public class AddressBookViewModel extends ViewModel {
 
     }
 
-    private void addPersonToGroup(String idPerson, String idGroup){
+    public void addPersonToGroup(String idPerson, String idGroup){
         String url = apiBasename + "/person/" + idPerson + "/group/" + idGroup;
         StringRequest addPersonToGroupRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {

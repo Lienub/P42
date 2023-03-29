@@ -42,7 +42,7 @@ public class GroupFragment extends Fragment implements RecyclerViewInterface {
 
         addressBookViewModel = new ViewModelProvider(this).get(AddressBookViewModel.class);
 
-        addressBookViewModel.getGroups().observe(getViewLifecycleOwner(), groups -> {
+        addressBookViewModel.getGroups(getViewLifecycleOwner()).observe(getViewLifecycleOwner(), groups -> {
             this.groups = groups;
             groupAdapter = new GroupAdapter(groups, this);
             groupRecyclerView.setAdapter(groupAdapter);

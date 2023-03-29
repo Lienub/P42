@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="50dp"
-        android:contentDescription="Type"
+        android:contentDescription="@string/type"
         android:layout_below="@id/mail_label_desc" />
 
     <Button
@@ -48,6 +48,6 @@
         android:layout_below="@id/mail_label_list"
         android:layout_marginTop="160dp"
         android:layout_marginStart="150dp"
-        android:text="Valider" />
+        android:text="@string/valider" />
 
 </RelativeLayout>

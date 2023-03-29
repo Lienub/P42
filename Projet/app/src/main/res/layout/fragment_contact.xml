@@ -104,6 +104,19 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Spinner
+        android:id="@+id/spinner_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_group" />
 
+
+    <Button
+        android:id="@+id/add_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_group"
+        android:text="AJOUTER LE CONTACT AU GROUPE" />
+    />
 
 </RelativeLayout>
